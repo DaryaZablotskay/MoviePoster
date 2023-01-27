@@ -2,10 +2,6 @@
     ViewData["Title"] = "Главная страница";
 }
 
-@{
-    Layout = "_HomeLayout";
-}
-
 <div>
     <h1 style="font-family : 'Comic Sans MS'" class="text-center">
         <font color="red">REDCIN</font>
@@ -24,8 +20,16 @@
     </h3>
 
     <h3 style="position: absolute; top: 340px; left: 700px; font-family: 'Comic Sans MS'">
-        <font color="white">Kомфортными креслами и вкусными кинозакусками.</font>
+        <font color="white">Kомфортными креслами и интереснейшими фильмами.</font>
     </h3>
 
     <button type="button" class="btn btn-danger btn-lg" style="position: absolute; top: 450px; left: 900px">Афиша</button>
 </div>
+
+@section Footer{
+    <footer class="footer text-white">
+        <div class="container">
+            <p align="center"> Контакты: +375 29 873 17 76, <a href="https://vk.com/daryushka_zzz" target="_blank">Заблоцкая Дарья</a></p>
+        </div>
+    </footer>
+}
