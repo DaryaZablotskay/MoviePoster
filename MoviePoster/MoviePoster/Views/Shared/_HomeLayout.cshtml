@@ -7,31 +7,29 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
-    <style>
-        body {
-            background: url(https://sun9-87.userapi.com/impg/OSp6kG4Xnce5tphz1s2PeF9BUjBaqwbMidxM5Q/STIhmMpgSsY.jpg?size=1280x720&quality=95&sign=08a7789822f472df865b272e02466f8f&type=album);
-            background-size: cover;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    @RenderSection("Background", required: false)
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Home"><i class="bi bi-house"></i>Главная страница</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Home"><i class="bi bi-house"></i> Главная страница</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="" asp-action=""><i class="bi bi-film" style="font-size:13px"></i>Афиша</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Poster" asp-action="Poster"><font size="4"><i class="bi bi-film" style="font-size:13px"></i> Афиша</font></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Info" asp-action="Info"><i class="bi bi-question-circle" style="font-size:15px"></i>О нас</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Info" asp-action="Info"><font size="4"><i class="bi bi-question-circle" style="font-size:15px"></i> О нас</font></a>
                         </li>
                     </ul>
+                    @RenderSection("About", required: false)
                 </div>
             </div>
         </nav>
@@ -45,7 +43,6 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Footer", required: false)
 </body>
 </html>
 

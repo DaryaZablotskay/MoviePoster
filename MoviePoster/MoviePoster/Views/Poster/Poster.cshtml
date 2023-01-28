@@ -1,0 +1,46 @@
+﻿@using MoviePoster.Dtos
+@model IEnumerable<FilmCatalogeDto>
+
+@{
+    ViewData["Title"] = "О нас";
+}
+
+@section Background{
+    <style>
+        body {
+            background: url(https://sun9-87.userapi.com/impg/OSp6kG4Xnce5tphz1s2PeF9BUjBaqwbMidxM5Q/STIhmMpgSsY.jpg?size=1280x720&quality=95&sign=08a7789822f472df865b272e02466f8f&type=album);
+            background-size: cover;
+        }
+    </style>
+}
+
+@section About{
+    <span>
+        <font color="white">
+            <i class="bi bi-person"></i> Контакты: +375 29 873 17 76,
+            <a href="https://vk.com/daryushka_zzz" target="_blank" style="color:red"> Заблоцкая Дарья</a>
+        </font>
+    </span>
+}
+
+<h1 style="position: absolute; left: 560px; top: 70px; font-family: 'Comic Sans MS'">
+    <font color="red">Афиша</font>
+</h1>
+<br /><br /><br />
+
+<div class="row row-cols-1 row-cols-md-4 g-4">
+    @foreach (var film in Model)
+    {
+        <div class="col">
+            <div class="card text-white bg-dark">
+                <img src="@film.PictureUrlCataloge" class="card-img-top" />
+                <div class="card-body">
+                    <h5 class="card-title">@film.NameCataoge</h5>
+                    <p class="card-text">Жанр: @film.GenreCataloge</p>
+                    <p class="card-text" style="color:gray">Возрастное ограничение: @film.AgeLimitCataloge</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

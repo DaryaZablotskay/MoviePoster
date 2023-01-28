@@ -2,34 +2,40 @@
     ViewData["Title"] = "Главная страница";
 }
 
+@section Background{
+    <style>
+        body {
+            background: url(https://sun9-82.userapi.com/impg/Mc40TZcZUYVqGHafDtresXgXwX5BE8zuf7byQA/fQkYQ8o7K-Y.jpg?size=910x607&quality=95&sign=db1f1efe7affc1fc20bebd6aeb4a86c6&type=album);
+            background-size: cover;
+        }
+    </style>
+}
+
+@section About{
+    <span>
+        <font color="white"><i class="bi bi-person"></i> Контакты: +375 29 873 17 76,
+            <a href="https://vk.com/daryushka_zzz" target="_blank" style="color:red"> Заблоцкая Дарья</a>
+        </font>
+    </span>
+}
+
 <div>
-    <h1 style="font-family : 'Comic Sans MS'" class="text-center">
-        <font color="red">REDCIN</font>
-    </h1>
 
-    <img src="images/Home.jpg"
-         width="560"
-         height="400">
-
-    <h3 style="position: absolute; top: 190px; left: 700px; font-family: 'Comic Sans MS'">
+    <h3 style="position:absolute; left:400px; top: 100px; font-family: 'Comic Sans MS'">
         <font color="white">Добро пожаловать в наш кинотеатр</font>
     </h3>
 
-    <h3 style="position: absolute; top: 245px; left: 700px; font-family: 'Comic Sans MS'">
-        <font color="white">C высокотехнологичным оборудованием,</font>
+    <h1 style="position: absolute; left: 560px; top: 160px; font-family: 'Comic Sans MS'">
+        <font color="red">REDCIN</font>
+    </h1>
+
+    <h3 style="position: absolute; left: 360px; top: 240px; font-family: 'Comic Sans MS'">
+        <font color="white">с высокотехнологичным оборудованием,</font>
     </h3>
 
-    <h3 style="position: absolute; top: 340px; left: 700px; font-family: 'Comic Sans MS'">
-        <font color="white">Kомфортными креслами и интереснейшими фильмами.</font>
+    <h3 style="position: absolute; left: 250px; top: 310px; font-family: 'Comic Sans MS'">
+        <font color="white">комфортными креслами и интереснейшими фильмами.</font>
     </h3>
 
-    <button type="button" class="btn btn-danger btn-lg" style="position: absolute; top: 450px; left: 900px">Афиша</button>
+    <button type="button" class="btn btn-danger btn-lg;" style="position: absolute; left: 602px; top: 480px;" onclick="location.href='@Url.Action("Poster", "Poster")'">Афиша</button>
 </div>
-
-@section Footer{
-    <footer class="footer text-white">
-        <div class="container">
-            <p align="center"> Контакты: +375 29 873 17 76, <a href="https://vk.com/daryushka_zzz" target="_blank">Заблоцкая Дарья</a></p>
-        </div>
-    </footer>
-}

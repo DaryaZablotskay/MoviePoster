@@ -41,6 +41,7 @@ namespace MoviePoster
             modelBuilder.Entity<Film>().Property(f => f.Duration).HasMaxLength(255);
             modelBuilder.Entity<Film>().Property(f => f.Description).HasMaxLength(1000);
             modelBuilder.Entity<Film>().Property(f => f.Genre).HasMaxLength(255);
+            modelBuilder.Entity<Film>().Property(f => f.PictureUrl).HasMaxLength(2000);
 
             modelBuilder.Entity<FilmUser>().HasKey(fu => fu.FilmUserId);
             modelBuilder.Entity<FilmUser>().Property(fu => fu.FilmUserId).HasDefaultValueSql("NEWID()");
