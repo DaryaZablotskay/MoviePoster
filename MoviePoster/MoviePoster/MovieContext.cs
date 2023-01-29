@@ -13,6 +13,7 @@ namespace MoviePoster
         public DbSet<User> Users { get; set; }
         public DbSet<Place> Places { get; set; }
         public DbSet<FilmUser> FilmUsers { get; set; }
+        public DbSet<ShowDate> ShowDates { get; set; }
 
         public MovieContext(DbContextOptions<MovieContext> context) : base(context)
         {
@@ -63,23 +64,10 @@ namespace MoviePoster
             modelBuilder.Entity<ShowDate>().HasKey(sd => sd.ShowDateId);
             modelBuilder.Entity<ShowDate>().Property(sd => sd.ShowDateId).HasDefaultValueSql("NEWID()");
 
-            modelBuilder.Entity<ShowdateFilm>().HasKey(sdf => sdf.ShowdateFilmId);
-            modelBuilder.Entity<ShowdateFilm>().Property(sdf => sdf.ShowdateFilmId).HasDefaultValueSql("NEWID()");
-
-            modelBuilder.Entity<ShowdateFilm>()
-                .HasOne(sdf => sdf.Film)
-                .WithMany(f => f.ShowdateFilms)
-                .HasForeignKey(sdf => sdf.FilmId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<ShowdateFilm>()
-               .HasOne(sdf => sdf.ShowDate)
-               .WithMany(sd => sd.ShowdateFilms)
-               .HasForeignKey(sdf => sdf.ShowDateId)
-               .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<ShowdateFilm>().HasIndex(sdf => new { sdf.ShowDateId, sdf.FilmId }).IsUnique();
-
+            modelBuilder.Entity<ShowDate>()
+                .HasOne(sd => sd.Film)
+                .WithMany(f => f.ShowDates)
+                .HasForeignKey(sd => sd.FilmId);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

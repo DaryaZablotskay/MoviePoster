@@ -1,13 +1,18 @@
 ﻿@using MoviePoster.Dtos
 @model OneFilmDto
+
 @{
     ViewData["Title"] = "Фильм";
+}
+
+@{ 
+    var dates =(IEnumerable<ShowDatesDto>)ViewBag.Dates;
 }
 
 @section Background{
     <style>
         body {
-            background: url(https://sun9-87.userapi.com/impg/OSp6kG4Xnce5tphz1s2PeF9BUjBaqwbMidxM5Q/STIhmMpgSsY.jpg?size=1280x720&quality=95&sign=08a7789822f472df865b272e02466f8f&type=album);
+            background: url(https://pibig.info/uploads/posts/2022-12/1670044920_1-pibig-info-p-krasno-chernii-gradient-fon-krasivo-1.jpg);
             background-size: cover;
         }
     </style>
@@ -46,6 +51,17 @@
     </h5>
     <p style="position: absolute; left: 355px; top: 350px; font-family: 'Comic Sans MS'; color: white">@Model.OneFilmDescription</p>
 
+    <h3 style="position: absolute; left: 560px; top: 500px; font-family: 'Comic Sans MS'">
+        <font color="white">Расписание: </font>
+    </h3>
+    <div style="position:absolute; left: 70px; top: 560px">
+        @foreach (var date in @dates)
+        {
+            <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Buy", "Poster", new { filmId = @date.FilmId, dateId = @date.ShowDatesDtoId})'" style="color:white">@date.Time</button>
+        }
+    </div>
+    <div style="position:absolute; left: 570px; top: 620px">
+        <a href="#" onclick="location.href='@Url.Action("Poster", "Poster")'" class="card-link" style="color : red">Вернуться к афише</a>
+    </div>
+
 </div>
-
-

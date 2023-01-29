@@ -31,7 +31,6 @@ namespace MoviePoster.Service
         public OneFilmDto GetOneFilm(Guid oneFilmId)
         {
             var oneFilm = (from film in _movieContext.Films
-                           //join sdFilm in _movieContext.ShowdateFilm
                            select new OneFilmDto
                            {
                                OneFilmId = film.FilmId,
@@ -44,6 +43,19 @@ namespace MoviePoster.Service
                                OneFilmRating = film.Rating
                            }).Where(ofd => ofd.OneFilmId == oneFilmId).First();
             return oneFilm;
+        }
+
+        public IEnumerable<ShowDatesDto> GetTimeForOneFilm(Guid oneFilmId)
+        {
+            var dates = (from film in _movieContext.Films
+                         join showDate in _movieContext.ShowDates on film.FilmId equals showDate.FilmId
+                         select new ShowDatesDto
+                         {
+                             ShowDatesDtoId = showDate.ShowDateId,
+                             FilmId = film.FilmId,
+                             Time = showDate.Date
+                         }).Where(sdd => sdd.FilmId == oneFilmId).ToList();
+            return dates;
         }
     }
 }

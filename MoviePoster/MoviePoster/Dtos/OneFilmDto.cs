@@ -15,6 +15,5 @@ namespace MoviePoster.Dtos
         public string OneFilmDescription { get; set; }
         public string OneFilmPictureUrl { get; set; }
         public double OneFilmRating { get; set; }
-        public List<DateTime> OneFilmShowDates { get; set; }
     }
 }

@@ -16,6 +16,6 @@ namespace MoviePoster.Models
         public string PictureUrl { get; set; }
         public double Rating { get; set; }
         public ICollection<FilmUser> FilmUsers { get; set; }
-        public ICollection<ShowdateFilm> ShowdateFilms { get; set; }
+        public ICollection<ShowDate> ShowDates { get; set; }
     }
 }

@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Забронировать билет";
+}
+
+@section Background{
+    <style>
+        body {
+            background: url(https://pibig.info/uploads/posts/2022-12/1670044920_1-pibig-info-p-krasno-chernii-gradient-fon-krasivo-1.jpg);
+            background-size: cover;
+        }
+    </style>
+}
+
+@section About{
+    <span>
+        <font color="white">
+            <i class="bi bi-person"></i> Контакты: +375 29 873 17 76,
+            <a href="https://vk.com/daryushka_zzz" target="_blank" style="color:red"> Заблоцкая Дарья</a>
+        </font>
+    </span>
+}
+
+<div>
+    <img src="~/images/Places.jpg" style="position:absolute; top:100px; left:450px; width: 350px; height: 250px">
+
+    <h5 style="position: absolute; left: 435px; top: 370px; font-family: 'Comic Sans MS'">
+        <font color="white">Заполните поля и забронируйте место:</font>
+    </h5>
+
+    <form method="post">
+        <div class="row" style="position: absolute; top: 420px; left:200px">
+            <div class="col">
+                <input class="form-control" placeholder="Имя">
+            </div>
+            <div class="col">
+                <input class="form-control" placeholder="Фамилия">
+            </div>
+            <div class="col">
+                <input class="form-control" placeholder="Ряд">
+            </div>
+            <div class="col">
+                <input class="form-control" placeholder="Сидение">
+            </div>
+        </div>
+        <div class="row" style="position: absolute; top: 480px; left:570px">
+            <button type="submit" class="btn btn-danger">Забронировать</button>
+        </div>
+    </form>
+</div>
