@@ -19,5 +19,11 @@ namespace MoviePoster.Controllers
             var films = _filmService.GetFilmCataloge();
             return View(films);
         }
+
+        public IActionResult Film(Guid id)
+        {
+            var oneFilm = _filmService.GetOneFilm(id);
+            return View(oneFilm);
+        }
     }
 }

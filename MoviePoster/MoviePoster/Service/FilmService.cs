@@ -27,5 +27,23 @@ namespace MoviePoster.Service
                                 }).ToList();
             return filmCataloge;
         }
+
+        public OneFilmDto GetOneFilm(Guid oneFilmId)
+        {
+            var oneFilm = (from film in _movieContext.Films
+                           //join sdFilm in _movieContext.ShowdateFilm
+                           select new OneFilmDto
+                           {
+                               OneFilmId = film.FilmId,
+                               OneFilmName = film.Name,
+                               OneFilmGenre = film.Genre,
+                               OneFilmAgeLimit = film.AgeLimit,
+                               OneFilmPictureUrl = film.PictureUrl,
+                               OneFilmDuration = film.Duration,
+                               OneFilmDescription = film.Description,
+                               OneFilmRating = film.Rating
+                           }).Where(ofd => ofd.OneFilmId == oneFilmId).First();
+            return oneFilm;
+        }
     }
 }

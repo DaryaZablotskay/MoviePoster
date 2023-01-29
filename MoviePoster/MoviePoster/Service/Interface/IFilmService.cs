@@ -9,5 +9,6 @@ namespace MoviePoster.Service.Interface
     public interface IFilmService
     {
         IEnumerable<FilmCatalogeDto> GetFilmCataloge();
+        OneFilmDto GetOneFilm(Guid oneFilmId);
     }
 }

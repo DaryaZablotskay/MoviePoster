@@ -1,0 +1,51 @@
+﻿@using MoviePoster.Dtos
+@model OneFilmDto
+@{
+    ViewData["Title"] = "Фильм";
+}
+
+@section Background{
+    <style>
+        body {
+            background: url(https://sun9-87.userapi.com/impg/OSp6kG4Xnce5tphz1s2PeF9BUjBaqwbMidxM5Q/STIhmMpgSsY.jpg?size=1280x720&quality=95&sign=08a7789822f472df865b272e02466f8f&type=album);
+            background-size: cover;
+        }
+    </style>
+}
+
+@section About{
+    <span>
+        <font color="white">
+            <i class="bi bi-person"></i> Контакты: +375 29 873 17 76,
+            <a href="https://vk.com/daryushka_zzz" target="_blank" style="color:red"> Заблоцкая Дарья</a>
+        </font>
+    </span>
+}
+<div>
+
+    <img src="@Model.OneFilmPictureUrl" style="top:110px; left:70px; position:absolute; width:260px; height:340px" />
+
+    <h3 style="position:absolute; left:355px; top: 110px; font-family: 'Comic Sans MS'">
+        <font color="white">@Model.OneFilmName</font>
+    </h3>
+
+    <h5 style="position: absolute; left: 355px; top: 170px; font-family: 'Comic Sans MS'">
+        <font color="white">@Model.OneFilmGenre / @Model.OneFilmAgeLimit</font>
+    </h5>
+
+    <h6 style="position: absolute; left: 355px; top: 220px; font-family: 'Comic Sans MS'">
+        <font color="white">Продолжительность: @Model.OneFilmDuration</font>
+    </h6>
+
+    <h5 style="position: absolute; left: 355px; top: 270px; font-family: 'Comic Sans MS'">
+        <font color="white">Рейтинг:<font color="red"> @Model.OneFilmRating <i class="bi bi-star-fill" style="color: red"></i></font></font>
+    </h5>
+
+    <h5 style="position: absolute; left: 355px; top: 320px; font-family: 'Comic Sans MS'">
+        <font color="white">О фильме:</font>
+    </h5>
+    <p style="position: absolute; left: 355px; top: 350px; font-family: 'Comic Sans MS'; color: white">@Model.OneFilmDescription</p>
+
+</div>
+
+

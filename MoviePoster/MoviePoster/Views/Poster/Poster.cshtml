@@ -2,7 +2,7 @@
 @model IEnumerable<FilmCatalogeDto>
 
 @{
-    ViewData["Title"] = "О нас";
+    ViewData["Title"] = "Афиша";
 }
 
 @section Background{
@@ -26,7 +26,9 @@
 <h1 style="position: absolute; left: 560px; top: 70px; font-family: 'Comic Sans MS'">
     <font color="red">Афиша</font>
 </h1>
-<br /><br /><br />
+<br />
+<br />
+<br />
 
 <div class="row row-cols-1 row-cols-md-4 g-4">
     @foreach (var film in Model)
@@ -38,6 +40,8 @@
                     <h5 class="card-title">@film.NameCataoge</h5>
                     <p class="card-text">Жанр: @film.GenreCataloge</p>
                     <p class="card-text" style="color:gray">Возрастное ограничение: @film.AgeLimitCataloge</p>
+                    @*<a asp-area="" asp-controller="Posrter" asp-action="Poster" asp-route-id="@film.FilmCatalogeId" class="card-link" style="color : red">Подробнее</a>*@
+                    <a href="#" onclick="location.href='@Url.Action("Film", "Poster", new { id = @film.FilmCatalogeId })'" class="card-link" style="color : red">Подробнее</a>
                 </div>
             </div>
         </div>
