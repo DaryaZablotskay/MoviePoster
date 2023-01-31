@@ -23,7 +23,8 @@ namespace MoviePoster.Service
                                     NameCataoge = film.Name,
                                     GenreCataloge = film.Genre,
                                     AgeLimitCataloge = film.AgeLimit,
-                                    PictureUrlCataloge = film.PictureUrl
+                                    PictureUrlCataloge = film.PictureUrl,
+                                    PriceCataloge = film.Price
                                 }).ToList();
             return filmCataloge;
         }
@@ -40,22 +41,46 @@ namespace MoviePoster.Service
                                OneFilmPictureUrl = film.PictureUrl,
                                OneFilmDuration = film.Duration,
                                OneFilmDescription = film.Description,
-                               OneFilmRating = film.Rating
-                           }).Where(ofd => ofd.OneFilmId == oneFilmId).First();
+                               OneFilmRating = film.Rating,
+                               OneFilmPrice = film.Price
+                           }).First(ofd => ofd.OneFilmId == oneFilmId);
             return oneFilm;
         }
 
         public IEnumerable<ShowDatesDto> GetTimeForOneFilm(Guid oneFilmId)
         {
             var dates = (from film in _movieContext.Films
-                         join showDate in _movieContext.ShowDates on film.FilmId equals showDate.FilmId
+                         join ticket in _movieContext.Tickets on film.FilmId equals ticket.FilmId
+                         join showDate in _movieContext.ShowDates on ticket.ShowDateId equals showDate.ShowDateId
                          select new ShowDatesDto
                          {
                              ShowDatesDtoId = showDate.ShowDateId,
                              FilmId = film.FilmId,
                              Time = showDate.Date
-                         }).Where(sdd => sdd.FilmId == oneFilmId).ToList();
+                         }).Where(sdd => sdd.FilmId == oneFilmId).Distinct().ToList();
             return dates;
+        }
+
+        public IEnumerable<PlacesDto> GetPlaces(Guid oneFilmId, Guid showDateId)
+        {
+            var places = (from place in _movieContext.Places
+                          join ticket in _movieContext.Tickets on place.PlaceId equals ticket.PlaceId
+                          join showDate in _movieContext.ShowDates on ticket.ShowDateId equals showDate.ShowDateId
+                          join film in _movieContext.Films on ticket.FilmId equals film.FilmId
+                          select new PlacesDto
+                          {
+                              FilmDtoId = film.FilmId,
+                              ShowDateDtoId = showDate.ShowDateId,
+                              PlaceDtoId = film.FilmId,
+                              HallDto = place.Hall,
+                              RowNumberDto = place.RowNumber,
+                              SeatNumberDto = place.SeatNumber,
+                              Status = place.Status
+                          })
+                          .Where(pd => pd.FilmDtoId == oneFilmId)
+                          .Where(pd => pd.ShowDateDtoId == showDateId)
+                          .ToList();
+            return places;
         }
     }
 }

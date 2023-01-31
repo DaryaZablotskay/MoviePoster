@@ -11,5 +11,6 @@ namespace MoviePoster.Service.Interface
         IEnumerable<FilmCatalogeDto> GetFilmCataloge();
         OneFilmDto GetOneFilm(Guid oneFilmId);
         IEnumerable<ShowDatesDto> GetTimeForOneFilm(Guid oneFilmId);
+        IEnumerable<PlacesDto> GetPlaces(Guid oneFilmId, Guid showDateId);
     }
 }

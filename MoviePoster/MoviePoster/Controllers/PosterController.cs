@@ -31,6 +31,8 @@ namespace MoviePoster.Controllers
 
         public IActionResult Buy(Guid filmId, Guid dateId)
         {
+            var places = _filmService.GetPlaces(filmId, dateId);
+            ViewBag.Places = places;
             return View();
         }
     }

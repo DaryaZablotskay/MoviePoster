@@ -39,7 +39,8 @@
                 <div class="card-body">
                     <h5 class="card-title">@film.NameCataoge</h5>
                     <p class="card-text">Жанр: @film.GenreCataloge</p>
-                    <p class="card-text" style="color:gray">Возрастное ограничение: @film.AgeLimitCataloge</p>
+                    <p class="card-text" style="color:white">Цена: @film.PriceCataloge руб</p>
+                    <p class="card-text" style="color:gray">Возрастное ограничение: @film.AgeLimitCataloge+</p>
                     <a href="#" onclick="location.href='@Url.Action("Film", "Poster", new { filmId = @film.FilmCatalogeId })'" class="card-link" style="color : red">Подробнее</a>
                 </div>
             </div>

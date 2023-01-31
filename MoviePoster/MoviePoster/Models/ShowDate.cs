@@ -9,7 +9,6 @@ namespace MoviePoster.Models
     {
         public Guid ShowDateId { get; set; }
         public DateTime Date { get; set; }
-        public Guid? FilmId { get; set; }
-        public Film Film { get; set; }
+        public ICollection<Ticket> Tickets { get; set; }
     }
 }
