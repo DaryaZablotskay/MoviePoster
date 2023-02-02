@@ -53,18 +53,6 @@
             <div class="col">
                 <input asp-for="SeatNumber" class="form-control" placeholder="Место">
             </div>
-            @*<div class="col">
-                    <select class="custom-select" id="inputGroupSelect01">
-                        <option selected>Место</option>
-                        @foreach (var place in @places)
-                        {
-                            if (place.Status)
-                            {
-                                <option>@place.HallDto зал, @place.RowNumberDto ряд, @place.SeatNumberDto место</option>
-                            }
-                        }
-                    </select>
-                </div>*@
         </div>
         <div class="row" style="position: absolute; top: 200px; left:570px">
             <button type="submit" class="btn btn-danger">Забронировать</button>

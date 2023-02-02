@@ -28,7 +28,7 @@ namespace MoviePoster.Configurations
             modelBuilder.HasOne(t => t.User)
                         .WithMany(u => u.Tickets)
                         .HasForeignKey(t => t.UserId)
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.HasOne(t => t.Place)
                         .WithMany(p => p.Tickets)

@@ -19,7 +19,7 @@ namespace MoviePoster.EmailHelper
             emailMessage.Subject = "Билет";
             emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
             {
-                Text = $"Вы забронировали место {place} на {date} на {film}"
+                Text = $"Вы забронировали {place} на {date} на фильм {film}"
             };
 
             using (var client = new MailKit.Net.Smtp.SmtpClient())

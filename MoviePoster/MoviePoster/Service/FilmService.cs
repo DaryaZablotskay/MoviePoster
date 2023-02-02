@@ -94,40 +94,26 @@ namespace MoviePoster.Service
             return places;
         }
 
-        public async Task AddUser(ReserveRequestUserDto user)
+        public async Task UpdateTicket(Guid filmId, Guid dateId, ReserveRequestUserDto entity)
         {
             var newUser = new User
             {
-                FirstName = user.FirstNameUser,
-                LastName = user.LastNameUser,
-                Email = user.Email
+                FirstName = entity.FirstNameUser,
+                LastName = entity.LastNameUser,
+                Email = entity.Email
             };
             await _userRepository.Add(newUser);
             await _userRepository.Save();
-        }
 
-        public async Task UpdateTicket(Guid filmId, Guid dateId, ReserveRequestUserDto entity)
-        {
-            var existUser = _userRepository.GetAll()
-                .Where(u => u.FirstName == entity.FirstNameUser)
-                .Where(u => u.LastName == entity.LastNameUser)
-                .FirstOrDefault(u => u.Email == entity.Email);
-
-            var userId = existUser.UserId;
+            var userId = newUser.UserId;
 
             var existPlaces = _placeRepository.GetAll()
-                .Where(p => p.Hall == entity.Hall)
-                .Where(p => p.RowNumber == entity.RowNumber)
-                .FirstOrDefault(p => p.SeatNumber == entity.SeatNumber);
-                //.FirstOrDefault(p => p.Hall == entity.Hall && p.RowNumber == entity.RowNumber && p.SeatNumber == entity.SeatNumber);
+                .FirstOrDefault(p => p.Hall == entity.Hall && p.RowNumber == entity.RowNumber && p.SeatNumber == entity.SeatNumber);
 
             var placeId = existPlaces.PlaceId;
 
             var existTicket = _ticketRepository.GetAll()
-                .Where(t => t.FilmId == filmId)
-                .Where(t => t.ShowDateId == dateId)
-                .FirstOrDefault(t => t.PlaceId == placeId);
-                //.FirstOrDefault(t => t.PlaceId == placeId && t.FilmId == filmId && t.ShowDateId == dateId);
+                .FirstOrDefault(t => t.PlaceId == placeId && t.FilmId == filmId && t.ShowDateId == dateId);
 
             existTicket.UserId = userId;
 

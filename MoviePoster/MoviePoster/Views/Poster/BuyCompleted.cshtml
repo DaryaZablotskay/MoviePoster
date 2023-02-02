@@ -2,6 +2,14 @@
     ViewData["Title"] = "Успех";
 }
 
+@{
+    var film = (string)ViewBag.Film;
+    var date = (DateTime)ViewBag.Date;
+    var hall = (int)ViewBag.Hall;
+    var row = (int)ViewBag.Row;
+    var seat = (int)ViewBag.Seat;
+}
+
 @section Background{
     <style>
         body {
@@ -20,6 +28,32 @@
     </span>
 }
 
-<h1 style="position:absolute; left:300px; top:100px; color:white">
-    Вы успешно забронировали место
+<h1 style="position:absolute; left:500px; top:100px; color:white">
+    Ваш билет:
 </h1>
+
+<img src="~/images/ticket.jpg" style="position:absolute; top:190px; left:300px; width: 650px; height: 300px">
+
+<h4 style="position:absolute; left:340px; top: 265px; width:290px; font-family: 'Comic Sans MS'">
+    <font color="red">ФИЛЬМ</font>
+</h4>
+
+<h4 style="position:absolute; left:340px; top: 350px; width:290px; font-family: 'Comic Sans MS'">
+    <font color="white">@film</font>
+</h4>
+
+<h6 style="position: absolute; left: 760px; top: 300px; font-family: 'Comic Sans MS'">
+    <font color="black">@date</font>
+</h6>
+
+<h6 style="position: absolute; left: 730px; top: 338px; font-family: 'Comic Sans MS'">
+    <font color="black">@hall</font>
+</h6>
+
+<h6 style="position: absolute; left: 730px; top: 380px; font-family: 'Comic Sans MS'">
+    <font color="black"> @row </font>
+</h6>
+
+<h6 style="position: absolute; left: 750px; top: 420px; font-family: 'Comic Sans MS'">
+    <font color="black"> @seat </font>
+</h6>
