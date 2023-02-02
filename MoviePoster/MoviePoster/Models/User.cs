@@ -11,8 +11,6 @@ namespace MoviePoster.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public DateTime ShowDate { get; set; }
-        public ICollection<Place> Places { get; set; }
-        public ICollection<FilmUser> FilmUsers { get; set; }    
+        public ICollection<Ticket> Tickets { get; set; }
     }
 }

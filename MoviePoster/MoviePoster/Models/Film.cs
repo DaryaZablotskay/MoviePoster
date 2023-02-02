@@ -10,12 +10,12 @@ namespace MoviePoster.Models
         public Guid FilmId { get; set; }
         public string Name { get; set; }
         public string Genre { get; set; }
-        public string AgeLimit { get; set; }
-        public string Duration { get; set; }
+        public int AgeLimit { get; set; }
+        public int Duration { get; set; }
         public string Description { get; set; }
         public string PictureUrl { get; set; }
         public double Rating { get; set; }
-        public ICollection<FilmUser> FilmUsers { get; set; }
-        public ICollection<ShowDate> ShowDates { get; set; }
+        public int Price { get; set; }
+        public ICollection<Ticket> Tickets { get; set; }
     }
 }

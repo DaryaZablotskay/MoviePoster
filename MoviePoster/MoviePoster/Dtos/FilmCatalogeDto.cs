@@ -10,7 +10,8 @@ namespace MoviePoster.Dtos
         public Guid FilmCatalogeId { get; set; }
         public string NameCataoge { get; set; }
         public string GenreCataloge { get; set; }
-        public string AgeLimitCataloge { get; set; }
+        public int AgeLimitCataloge { get; set; }
         public string PictureUrlCataloge { get; set; }
+        public int PriceCataloge { get; set; }
     }
 }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MoviePoster;
 
 namespace MoviePoster.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    partial class MovieContextModelSnapshot : ModelSnapshot
+    [Migration("20230202145506_ChangeInPlaces")]
+    partial class ChangeInPlaces
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -137,6 +139,9 @@ namespace MoviePoster.Migrations
                     b.Property<int>("SeatNumber")
                         .HasColumnType("int");
 
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
                     b.HasKey("PlaceId");
 
                     b.ToTable("Places");
@@ -147,42 +152,48 @@ namespace MoviePoster.Migrations
                             PlaceId = new Guid("bb03b2c7-ca1a-4bfa-bced-a398b9dab90f"),
                             Hall = 1,
                             RowNumber = 1,
-                            SeatNumber = 1
+                            SeatNumber = 1,
+                            Status = true
                         },
                         new
                         {
                             PlaceId = new Guid("24c523fc-7f04-40b2-9496-25d085de0584"),
                             Hall = 1,
                             RowNumber = 1,
-                            SeatNumber = 2
+                            SeatNumber = 2,
+                            Status = true
                         },
                         new
                         {
                             PlaceId = new Guid("b44283ae-a373-4365-b424-7cf6c6e460cd"),
                             Hall = 1,
                             RowNumber = 2,
-                            SeatNumber = 1
+                            SeatNumber = 1,
+                            Status = true
                         },
                         new
                         {
                             PlaceId = new Guid("9e28f3da-c04d-4779-8541-f58dbf0dabe9"),
                             Hall = 1,
                             RowNumber = 2,
-                            SeatNumber = 2
+                            SeatNumber = 2,
+                            Status = true
                         },
                         new
                         {
                             PlaceId = new Guid("23a7b943-5e4c-4304-a3ab-1cda0f58a2a0"),
                             Hall = 2,
                             RowNumber = 1,
-                            SeatNumber = 1
+                            SeatNumber = 1,
+                            Status = true
                         },
                         new
                         {
                             PlaceId = new Guid("e34e7df7-31e1-422e-afb9-a7602c18567b"),
-                            Hall = 2,
+                            Hall = 1,
                             RowNumber = 2,
-                            SeatNumber = 1
+                            SeatNumber = 1,
+                            Status = true
                         });
                 });
 
@@ -373,7 +384,7 @@ namespace MoviePoster.Migrations
                     b.HasOne("MoviePoster.Models.User", "User")
                         .WithMany("Tickets")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

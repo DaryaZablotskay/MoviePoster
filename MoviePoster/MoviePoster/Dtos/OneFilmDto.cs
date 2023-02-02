@@ -10,10 +10,11 @@ namespace MoviePoster.Dtos
         public Guid OneFilmId { get; set; }
         public string OneFilmName { get; set; }
         public string OneFilmGenre { get; set; }
-        public string OneFilmAgeLimit { get; set; }
-        public string OneFilmDuration { get; set; }
+        public int OneFilmAgeLimit { get; set; }
+        public int OneFilmDuration { get; set; }
         public string OneFilmDescription { get; set; }
         public string OneFilmPictureUrl { get; set; }
         public double OneFilmRating { get; set; }
+        public int OneFilmPrice { get; set; }
     }
 }
