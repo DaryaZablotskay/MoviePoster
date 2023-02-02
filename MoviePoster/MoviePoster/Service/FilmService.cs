@@ -1,4 +1,6 @@
 ﻿using MoviePoster.Dtos;
+using MoviePoster.Models;
+using MoviePoster.Repositories.Interfaces;
 using MoviePoster.Service.Interface;
 using System;
 using System.Collections.Generic;
@@ -10,9 +12,18 @@ namespace MoviePoster.Service
     public class FilmService : IFilmService
     {
         private readonly MovieContext _movieContext;
-        public FilmService(MovieContext movieContext)
+        private readonly IUserRepository _userRepository;
+        private readonly IPlaceRepository _placeRepository;
+        private readonly IShowDateRepository _showDateRepository;
+        private readonly ITicketRepository _ticketRepository;
+
+        public FilmService(MovieContext movieContext, IUserRepository userRepository, IPlaceRepository placeRepository, IShowDateRepository showDateRepository, ITicketRepository ticketRepository)
         {
             _movieContext = movieContext;
+            _userRepository = userRepository;
+            _placeRepository = placeRepository;
+            _showDateRepository = showDateRepository;
+            _ticketRepository = ticketRepository;
         }
         public IEnumerable<FilmCatalogeDto> GetFilmCataloge()
         {
@@ -72,15 +83,56 @@ namespace MoviePoster.Service
                               FilmDtoId = film.FilmId,
                               ShowDateDtoId = showDate.ShowDateId,
                               PlaceDtoId = film.FilmId,
+                              UserDtoId = ticket.UserId,
                               HallDto = place.Hall,
                               RowNumberDto = place.RowNumber,
-                              SeatNumberDto = place.SeatNumber,
-                              Status = place.Status
+                              SeatNumberDto = place.SeatNumber
                           })
                           .Where(pd => pd.FilmDtoId == oneFilmId)
                           .Where(pd => pd.ShowDateDtoId == showDateId)
                           .ToList();
             return places;
+        }
+
+        public async Task AddUser(ReserveRequestUserDto user)
+        {
+            var newUser = new User
+            {
+                FirstName = user.FirstNameUser,
+                LastName = user.LastNameUser,
+                Email = user.Email
+            };
+            await _userRepository.Add(newUser);
+            await _userRepository.Save();
+        }
+
+        public async Task UpdateTicket(Guid filmId, Guid dateId, ReserveRequestUserDto entity)
+        {
+            var existUser = _userRepository.GetAll()
+                .Where(u => u.FirstName == entity.FirstNameUser)
+                .Where(u => u.LastName == entity.LastNameUser)
+                .FirstOrDefault(u => u.Email == entity.Email);
+
+            var userId = existUser.UserId;
+
+            var existPlaces = _placeRepository.GetAll()
+                .Where(p => p.Hall == entity.Hall)
+                .Where(p => p.RowNumber == entity.RowNumber)
+                .FirstOrDefault(p => p.SeatNumber == entity.SeatNumber);
+                //.FirstOrDefault(p => p.Hall == entity.Hall && p.RowNumber == entity.RowNumber && p.SeatNumber == entity.SeatNumber);
+
+            var placeId = existPlaces.PlaceId;
+
+            var existTicket = _ticketRepository.GetAll()
+                .Where(t => t.FilmId == filmId)
+                .Where(t => t.ShowDateId == dateId)
+                .FirstOrDefault(t => t.PlaceId == placeId);
+                //.FirstOrDefault(t => t.PlaceId == placeId && t.FilmId == filmId && t.ShowDateId == dateId);
+
+            existTicket.UserId = userId;
+
+            _ticketRepository.Update(existTicket);
+            await _ticketRepository.Save();
         }
     }
 }

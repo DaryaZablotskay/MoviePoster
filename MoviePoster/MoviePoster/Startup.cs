@@ -5,8 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MoviePoster.Service;
-using MoviePoster.Service.Interface;
+using MoviePoster.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +30,8 @@ namespace MoviePoster
             {
                 options.UseSqlServer(Configuration.GetConnectionString("Default"));
             });
-            services.AddScoped<IFilmService, FilmService>();
+
+            services.AddServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

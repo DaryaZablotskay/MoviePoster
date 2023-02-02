@@ -114,47 +114,41 @@ namespace MoviePoster.Helpers
                     Hall = 1,
                     RowNumber =1,
                     SeatNumber =1,
-                    Status = true
                 },
                 new Place
                 {
                     PlaceId = new Guid("24c523fc-7f04-40b2-9496-25d085de0584"),
                     Hall = 1,
                     RowNumber =1,
-                    SeatNumber =2,
-                    Status = true
+                    SeatNumber =2
                 },
                 new Place
                 {
                     PlaceId = new Guid("b44283ae-a373-4365-b424-7cf6c6e460cd"),
                     Hall = 1,
                     RowNumber =2,
-                    SeatNumber =1,
-                    Status = true
+                    SeatNumber =1
                 },
                 new Place
                 {
                     PlaceId = new Guid("9e28f3da-c04d-4779-8541-f58dbf0dabe9"),
                     Hall = 1,
                     RowNumber =2,
-                    SeatNumber =2,
-                    Status = true
+                    SeatNumber =2
                 },
                 new Place
                 {
                     PlaceId = new Guid("23a7b943-5e4c-4304-a3ab-1cda0f58a2a0"),
                     Hall = 2,
                     RowNumber =1,
-                    SeatNumber =1,
-                    Status = true
+                    SeatNumber =1
                 },
                 new Place
                 {
                     PlaceId = new Guid("e34e7df7-31e1-422e-afb9-a7602c18567b"),
-                    Hall = 1,
+                    Hall = 2,
                     RowNumber =2,
-                    SeatNumber =1,
-                    Status = true
+                    SeatNumber =1
                 }
             };
             return places;

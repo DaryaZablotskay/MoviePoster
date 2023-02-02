@@ -10,9 +10,9 @@ namespace MoviePoster.Dtos
         public Guid FilmDtoId { get; set; }
         public Guid ShowDateDtoId { get; set; }
         public Guid PlaceDtoId { get; set; }
+        public Guid? UserDtoId { get; set; }
         public int HallDto { get; set; }
         public int RowNumberDto { get; set; }
         public int SeatNumberDto { get; set; }
-        public bool Status { get; set; }
     }
 }
