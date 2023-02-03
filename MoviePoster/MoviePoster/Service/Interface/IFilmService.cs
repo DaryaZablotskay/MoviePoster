@@ -8,10 +8,10 @@ namespace MoviePoster.Service.Interface
 {
     public interface IFilmService
     {
-        IEnumerable<FilmCatalogeDto> GetFilmCataloge();
-        OneFilmDto GetOneFilm(Guid oneFilmId);
-        IEnumerable<ShowDatesDto> GetTimeForOneFilm(Guid oneFilmId);
-        IEnumerable<PlacesDto> GetPlaces(Guid oneFilmId, Guid showDateId);
+        Task<IEnumerable<FilmCatalogeDto>> GetFilmCataloge();
+        Task<OneFilmDto> GetOneFilm(Guid oneFilmId);
+        Task<IEnumerable<ShowDatesDto>> GetTimeForOneFilm(Guid oneFilmId);
+        Task<IEnumerable<PlacesDto>> GetPlaces(Guid oneFilmId, Guid showDateId);
         Task UpdateTicket(Guid filmId, Guid dateId, ReserveRequestUserDto user);
     }
 }

@@ -28,27 +28,27 @@ namespace MoviePoster.Controllers
             _ticketRepository = ticketRepository;
             _placeRepository = placeRepository;
         }
-        public IActionResult Poster()
+        public async Task<IActionResult> Poster()
         {
-            var films = _filmService.GetFilmCataloge();
+            var films = await _filmService.GetFilmCataloge();
             return View(films);
         }
 
-        public IActionResult Film(Guid filmId)
+        public async Task<IActionResult> Film(Guid filmId)
         {
-            var oneFilm = _filmService.GetOneFilm(filmId);
-            var dates = _filmService.GetTimeForOneFilm(filmId);
+            var oneFilm = await _filmService.GetOneFilm(filmId);
+            var dates = await _filmService.GetTimeForOneFilm(filmId);
             ViewBag.Dates = dates;
 
             return View(oneFilm);
         }
 
         [HttpGet]
-        public IActionResult Buy(Guid filmId, Guid dateId)
+        public async Task<IActionResult> Buy(Guid filmId, Guid dateId)
         {
             ViewBag.FilmId = filmId;
             ViewBag.DateId = dateId;
-            var places = _filmService.GetPlaces(filmId, dateId);
+            var places = await _filmService.GetPlaces(filmId, dateId);
             ViewBag.Places = places;
             return View();
         }

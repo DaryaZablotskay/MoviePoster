@@ -1,4 +1,5 @@
-﻿using MoviePoster.Dtos;
+﻿using Microsoft.EntityFrameworkCore;
+using MoviePoster.Dtos;
 using MoviePoster.Models;
 using MoviePoster.Repositories.Interfaces;
 using MoviePoster.Service.Interface;
@@ -25,9 +26,9 @@ namespace MoviePoster.Service
             _showDateRepository = showDateRepository;
             _ticketRepository = ticketRepository;
         }
-        public IEnumerable<FilmCatalogeDto> GetFilmCataloge()
+        public async Task<IEnumerable<FilmCatalogeDto>> GetFilmCataloge()
         {
-            var filmCataloge = (from film in _movieContext.Films
+            var filmCataloge = await (from film in _movieContext.Films
                                 select new FilmCatalogeDto
                                 {
                                     FilmCatalogeId = film.FilmId,
@@ -36,13 +37,13 @@ namespace MoviePoster.Service
                                     AgeLimitCataloge = film.AgeLimit,
                                     PictureUrlCataloge = film.PictureUrl,
                                     PriceCataloge = film.Price
-                                }).ToList();
+                                }).ToListAsync();
             return filmCataloge;
         }
 
-        public OneFilmDto GetOneFilm(Guid oneFilmId)
+        public async Task<OneFilmDto> GetOneFilm(Guid oneFilmId)
         {
-            var oneFilm = (from film in _movieContext.Films
+            var oneFilm = await (from film in _movieContext.Films
                            select new OneFilmDto
                            {
                                OneFilmId = film.FilmId,
@@ -54,13 +55,13 @@ namespace MoviePoster.Service
                                OneFilmDescription = film.Description,
                                OneFilmRating = film.Rating,
                                OneFilmPrice = film.Price
-                           }).First(ofd => ofd.OneFilmId == oneFilmId);
+                           }).FirstAsync(ofd => ofd.OneFilmId == oneFilmId);
             return oneFilm;
         }
 
-        public IEnumerable<ShowDatesDto> GetTimeForOneFilm(Guid oneFilmId)
+        public async Task<IEnumerable<ShowDatesDto>> GetTimeForOneFilm(Guid oneFilmId)
         {
-            var dates = (from film in _movieContext.Films
+            var dates = await (from film in _movieContext.Films
                          join ticket in _movieContext.Tickets on film.FilmId equals ticket.FilmId
                          join showDate in _movieContext.ShowDates on ticket.ShowDateId equals showDate.ShowDateId
                          select new ShowDatesDto
@@ -68,13 +69,13 @@ namespace MoviePoster.Service
                              ShowDatesDtoId = showDate.ShowDateId,
                              FilmId = film.FilmId,
                              Time = showDate.Date
-                         }).Where(sdd => sdd.FilmId == oneFilmId).Distinct().ToList();
+                         }).Where(sdd => sdd.FilmId == oneFilmId).Distinct().ToListAsync();
             return dates;
         }
 
-        public IEnumerable<PlacesDto> GetPlaces(Guid oneFilmId, Guid showDateId)
+        public async Task<IEnumerable<PlacesDto>> GetPlaces(Guid oneFilmId, Guid showDateId)
         {
-            var places = (from place in _movieContext.Places
+            var places = await (from place in _movieContext.Places
                           join ticket in _movieContext.Tickets on place.PlaceId equals ticket.PlaceId
                           join showDate in _movieContext.ShowDates on ticket.ShowDateId equals showDate.ShowDateId
                           join film in _movieContext.Films on ticket.FilmId equals film.FilmId
@@ -90,7 +91,7 @@ namespace MoviePoster.Service
                           })
                           .Where(pd => pd.FilmDtoId == oneFilmId)
                           .Where(pd => pd.ShowDateDtoId == showDateId)
-                          .ToList();
+                          .ToListAsync();
             return places;
         }
 
