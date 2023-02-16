@@ -73,7 +73,7 @@ namespace MoviePoster.Service
             return dates;
         }
 
-        public async Task<IEnumerable<PlacesDto>> GetPlaces(Guid oneFilmId, Guid showDateId)
+        public async Task<IEnumerable<PlacesDto>> GetFreePlaces(Guid oneFilmId, Guid showDateId)
         {
             var places = await (from place in _movieContext.Places
                           join ticket in _movieContext.Tickets on place.PlaceId equals ticket.PlaceId
@@ -90,23 +90,17 @@ namespace MoviePoster.Service
                               SeatNumberDto = place.SeatNumber
                           })
                           .Where(pd => pd.FilmDtoId == oneFilmId)
-                          .Where(pd => pd.ShowDateDtoId == showDateId)
+                          .Where(pd => pd.ShowDateDtoId == showDateId   )
+                          .Where(pd => pd.UserDtoId == null)
                           .ToListAsync();
             return places;
         }
 
-        public async Task UpdateTicket(Guid filmId, Guid dateId, ReserveRequestUserDto entity)
+        public async Task UpdateTicket(Guid filmId, Guid dateId, ReserveRequestUserDto entity, string email)
         {
-            var newUser = new User
-            {
-                FirstName = entity.FirstNameUser,
-                LastName = entity.LastNameUser,
-                Email = entity.Email
-            };
-            await _userRepository.Add(newUser);
-            await _userRepository.Save();
+            var existUser = await _userRepository.GetByEmail(email);
 
-            var userId = newUser.UserId;
+            var userId = existUser.UserId;
 
             var existPlaces = _placeRepository.GetAll()
                 .FirstOrDefault(p => p.Hall == entity.Hall && p.RowNumber == entity.RowNumber && p.SeatNumber == entity.SeatNumber);
@@ -120,6 +114,28 @@ namespace MoviePoster.Service
 
             _ticketRepository.Update(existTicket);
             await _ticketRepository.Save();
+        }
+
+        public async Task<IEnumerable<InfoBasketDto>> GetBasket(User person)
+        {
+            var userId = person.UserId;
+            var basket = await (from ticket in _movieContext.Tickets
+                                join place in _movieContext.Places on ticket.PlaceId equals place.PlaceId
+                                join showDate in _movieContext.ShowDates on ticket.ShowDateId equals showDate.ShowDateId
+                                join film in _movieContext.Films on ticket.FilmId equals film.FilmId
+                                join user in _movieContext.Users on ticket.UserId equals user.UserId
+                                select new InfoBasketDto
+                                {
+                                    UserId = user.UserId,
+                                    FilmName = film.Name,
+                                    Hall = place.Hall,
+                                    RowNumber = place.RowNumber,
+                                    SeatNumber = place.SeatNumber,
+                                    Date = showDate.Date
+                                })
+                          .Where(ibd => ibd.UserId == userId)
+                          .ToListAsync();
+            return basket;
         }
     }
 }

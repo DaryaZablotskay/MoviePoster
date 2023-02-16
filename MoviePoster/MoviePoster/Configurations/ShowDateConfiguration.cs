@@ -13,7 +13,6 @@ namespace MoviePoster.Configurations
         public void Configure(EntityTypeBuilder<ShowDate> modelBuilder)
         {
             modelBuilder.HasKey(sd => sd.ShowDateId);
-            modelBuilder.Property(sd => sd.ShowDateId).HasDefaultValueSql("NEWID()");
         }
     }
 }

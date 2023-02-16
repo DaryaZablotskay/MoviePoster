@@ -57,7 +57,7 @@
     <div style="position:absolute; left: 70px; top: 560px">
         @foreach (var date in @dates)
         {
-            <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Buy", "Poster", new { filmId = @date.FilmId, dateId = @date.ShowDatesDtoId})'" style="color:white">@date.Time</button>
+            <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Buy", "Buy", new { filmId = @date.FilmId, dateId = @date.ShowDatesDtoId})'" style="color:white">@date.Time</button>
         }
     </div>
     <div style="position:absolute; left: 570px; top: 620px">

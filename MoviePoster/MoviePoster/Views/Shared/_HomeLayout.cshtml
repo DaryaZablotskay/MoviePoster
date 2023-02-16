@@ -28,6 +28,22 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Info" asp-action="Info"><font size="4"><i class="bi bi-question-circle" style="font-size:15px"></i> О нас</font></a>
                         </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Authorization" asp-action="Logout"><font size="4"><i class="bi bi-box-arrow-left" style="font-size:15px"></i> Выход</font></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Basket" asp-action="Basket"><font size="4"><i class="bi bi-cart2" style="font-size:15px"></i> Корзина</font></a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Authorization" asp-action="Login"><font size="4"><i class="bi bi-box-arrow-in-right" style="font-size:15px"></i> Вход</font></a>
+                            </li>
+                        }
+
                     </ul>
                     @RenderSection("About", required: false)
                 </div>

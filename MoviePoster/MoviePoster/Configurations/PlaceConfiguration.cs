@@ -13,7 +13,6 @@ namespace MoviePoster.Configurations
         public void Configure(EntityTypeBuilder<Place> modelBuilder)
         {
             modelBuilder.HasKey(p => p.PlaceId);
-            modelBuilder.Property(p => p.PlaceId).HasDefaultValueSql("NEWID()");
         }
     }
 }

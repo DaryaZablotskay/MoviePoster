@@ -36,15 +36,6 @@
     <form method="post">
         <div class="row" style="position: absolute; top: 130px; width:1200px; left:50px">
             <div class="col">
-                <input asp-for="FirstNameUser" class="form-control" placeholder="Имя">
-            </div>
-            <div class="col">
-                <input asp-for="LastNameUser" class="form-control" placeholder="Фамилия">
-            </div>
-            <div class="col">
-                <input asp-for="Email" class="form-control" placeholder="Email">
-            </div>
-            <div class="col">
                 <input asp-for="Hall" class="form-control" placeholder="Зал">
             </div>
             <div class="col">
@@ -64,9 +55,13 @@
         <font color="white">Свободные места:</font>
     </h4>
     <div style="position:absolute; left:380px; top:300px">
-        @foreach (var place in @places)
+        @if (places is null)
         {
-            @if (place.UserDtoId is null)
+            <font color="white"> Свободных мест нет! </font>
+        }
+        else
+        {
+            @foreach (var place in places)
             {
                 <ul>
                     <font color="white">

@@ -1,0 +1,51 @@
+﻿@using MoviePoster.Dtos
+@model UserLoginDto
+
+@{
+    ViewData["Title"] = "Вход";
+}
+
+@section Background{
+    <style>
+        body {
+            background: url(https://pibig.info/uploads/posts/2022-12/1670044920_1-pibig-info-p-krasno-chernii-gradient-fon-krasivo-1.jpg);
+            background-size: cover;
+        }
+    </style>
+}
+
+@section About{
+    <span>
+        <font color="white">
+            <i class="bi bi-person"></i> Контакты: +375 29 873 17 76,
+            <a href="https://vk.com/daryushka_zzz" target="_blank" style="color:red"> Заблоцкая Дарья</a>
+        </font>
+    </span>
+}
+
+<h2 style="position: absolute; left: 500px; top: 70px; font-family: 'Comic Sans MS'">
+    <font color="white">Вход на сайт</font>
+</h2>
+
+<form asp-action="Login" asp-controller="Authorization" asp-anti-forgery="true">
+    <div class="validation" asp-validation-summary="ModelOnly" style="position:absolute; left:450px; top:120px; color:red"></div>
+    <div>
+        <div class="form-group" style="position:absolute; left:460px; top:160px" >
+            <label asp-for="Email"><font color="white">Введите Email </font></label>
+            <input type="text" asp-for="Email" />
+            <span asp-validation-for="Email" />
+        </div>
+        <div class="form-group" style="position:absolute; left:455px; top:220px">
+            <label asp-for="Password"><font color="white">Введите пароль </font></label>
+            <input type="password" asp-for="Password" />
+            <span asp-validation-for="Password" />
+        </div>
+        <div class="form-group" style="position: absolute; top: 300px; left:570px">
+            <input type="submit" value="Войти" class="btn btn-danger" />
+        </div>
+    </div>
+</form>
+
+<h4 style="position:absolute; left: 480px; top: 370px">
+    <a href="#" onclick="location.href='@Url.Action("Register", "Authorization")'" class="card-link" style="color : red">Не зарегистрированны?</a>
+</h4>
