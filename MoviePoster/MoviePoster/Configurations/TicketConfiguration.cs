@@ -13,7 +13,6 @@ namespace MoviePoster.Configurations
         public void Configure(EntityTypeBuilder<Ticket> modelBuilder)
         {
             modelBuilder.HasKey(t => t.TicketId);
-            modelBuilder.Property(t => t.TicketId).HasDefaultValueSql("NEWID()");
 
             modelBuilder.HasOne(t => t.ShowDate)
                         .WithMany(sd => sd.Tickets)

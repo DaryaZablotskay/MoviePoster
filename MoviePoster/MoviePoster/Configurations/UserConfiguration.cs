@@ -13,10 +13,11 @@ namespace MoviePoster.Configurations
         public void Configure(EntityTypeBuilder<User> modelBuilder)
         {
             modelBuilder.HasKey(u => u.UserId);
-            modelBuilder.Property(u => u.UserId).HasDefaultValueSql("NEWID()");
             modelBuilder.Property(u => u.FirstName).HasMaxLength(255);
             modelBuilder.Property(u => u.LastName).HasMaxLength(255);
             modelBuilder.Property(u => u.Email).HasMaxLength(255);
+            modelBuilder.Property(u => u.Password).HasMaxLength(255);
+            modelBuilder.HasIndex(u => u.Email).IsUnique();
         }
     }
 }

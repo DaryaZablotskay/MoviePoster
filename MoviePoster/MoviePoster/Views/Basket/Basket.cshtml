@@ -1,0 +1,46 @@
+﻿@using MoviePoster.Dtos
+@model IEnumerable<InfoBasketDto>
+
+@{
+    ViewData["Title"] = "Фильм";
+}
+
+@{
+    var firstName = (string)ViewBag.FirstName;
+    var lastName = (string)ViewBag.LastName;
+}
+
+@section Background{
+    <style>
+        body {
+            background: url(https://pibig.info/uploads/posts/2022-12/1670044920_1-pibig-info-p-krasno-chernii-gradient-fon-krasivo-1.jpg);
+            background-size: cover;
+        }
+    </style>
+}
+
+@section About{
+    <span>
+        <font color="white">
+            <i class="bi bi-person"></i> Контакты: +375 29 873 17 76,
+            <a href="https://vk.com/daryushka_zzz" target="_blank" style="color:red"> Заблоцкая Дарья</a>
+        </font>
+    </span>
+}
+
+<div>
+    <h3 style="position:absolute; left:335px; top: 110px; font-family: 'Comic Sans MS'">
+        <font color="white">@firstName @lastName, вы забронировали билеты на:</font>
+    </h3>
+    <div class="list-group" style="position:absolute; left:360px; top:190px">
+        @foreach (var item in Model)
+        {
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-danger" style="font-size:22px">Фильм: @item.FilmName</li>
+            <small class="list-group-item list-group-item-danger">Место: @item.Hall зал, @item.RowNumber ряд, @item.SeatNumber место</small>
+            <small class="list-group-item list-group-item-danger">Время: @item.Date</small>
+        </ul>
+        }
+    </div>
+</div>
+

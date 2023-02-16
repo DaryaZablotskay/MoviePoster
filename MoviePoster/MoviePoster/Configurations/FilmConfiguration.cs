@@ -13,7 +13,6 @@ namespace MoviePoster.Configurations
         public void Configure(EntityTypeBuilder<Film> modelBuilder)
         {
             modelBuilder.HasKey(f => f.FilmId);
-            modelBuilder.Property(f => f.FilmId).HasDefaultValueSql("NEWID()");
             modelBuilder.Property(f => f.Name).HasMaxLength(255);
             modelBuilder.Property(f => f.Description).HasMaxLength(1000);
             modelBuilder.Property(f => f.Genre).HasMaxLength(255);
