@@ -47,10 +47,11 @@ namespace MoviePoster.Controllers
                         Email = userRegisterDto.Email,
                         Password = userRegisterDto.Password
                     };
-                    Role userRole = await _movieContext.Roles.FirstOrDefaultAsync(r => r.Name == "user");
+
+                    var userRole = await _movieContext.Roles.SingleOrDefaultAsync(r => r.Name == "user");
                     if (userRole != null)
                     {
-                        user.Role = userRole;
+                        newUser.Role = userRole;
                     }
                        
                     await _userRepository.Add(newUser);
