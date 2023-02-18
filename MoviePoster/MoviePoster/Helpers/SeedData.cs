@@ -231,5 +231,37 @@ namespace MoviePoster.Helpers
             };
             return tickets;
         }
+
+        public static Role[] GenerateRoles()
+        {
+            var roles = new Role[]
+            {
+                new Role
+                {
+                    RoleId = new Guid("5c132ec5-7b5c-44c0-83b5-a092829f2607"),
+                    Name="admin"
+                },
+                new Role
+                {
+                    RoleId = new Guid("0f7d5eb9-99a2-46b5-813f-84e6420f48a2"),
+                    Name = "user"
+                }
+            };
+            return roles;
+        }
+
+        public static User GenerateAdmin()
+        {
+            var admin = new User
+            {
+                UserId = new Guid("d9232052-926d-4316-b4f5-98cc6136d73a"),
+                FirstName = "Дарья",
+                LastName = "Заблоцкая",
+                Email = "dasaz659@gmail.com",
+                Password = "12345678",
+                RoleId = new Guid("5c132ec5-7b5c-44c0-83b5-a092829f2607")
+            };
+            return admin;
+        }
     }
 }

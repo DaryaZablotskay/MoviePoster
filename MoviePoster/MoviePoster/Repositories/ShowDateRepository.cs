@@ -25,6 +25,11 @@ namespace MoviePoster.Repositories
             return await _movieContext.ShowDates.FindAsync(id);
         }
 
+        public Task Add(ShowDate showDate)
+        {
+            return _movieContext.ShowDates.AddAsync(showDate).AsTask();
+        }
+
         public Task Save()
         {
             return _movieContext.SaveChangesAsync();

@@ -10,5 +10,7 @@ namespace MoviePoster.Repositories.Interfaces
     {
         IQueryable<Film> GetAll();
         Task<Film> GetById(Guid id);
+        Task Add(Film film);
+        Task Save();
     }
 }

@@ -37,6 +37,7 @@ namespace MoviePoster
                             .AddCookie(options =>
                             {
                                 options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Authorization/Login");
+                                options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Authorization/Login");
                             });
         }
 

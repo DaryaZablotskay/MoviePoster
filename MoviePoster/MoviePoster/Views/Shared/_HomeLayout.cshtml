@@ -28,6 +28,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Info" asp-action="Info"><font size="4"><i class="bi bi-question-circle" style="font-size:15px"></i> О нас</font></a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Admin" asp-action="AddPage"><font size="4">Добавить</font></a>
+                        </li>
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
