@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MoviePoster.Dtos;
 using MoviePoster.Models;
 using MoviePoster.Repositories.Interfaces;
@@ -14,10 +15,12 @@ namespace MoviePoster.Controllers
 {
     public class AuthorizationController : Controller
     {
+        private readonly MovieContext _movieContext;
         private readonly IUserRepository _userRepository;
 
-        public AuthorizationController(IUserRepository userRepository)
+        public AuthorizationController(MovieContext movieContext, IUserRepository userRepository)
         {
+            _movieContext = movieContext;
             _userRepository = userRepository;
         }
 
@@ -37,16 +40,22 @@ namespace MoviePoster.Controllers
 
                 if(user is null)
                 {
-                    await _userRepository.Add(new User
+                    var newUser = new User
                     {
                         FirstName = userRegisterDto.FirstName,
                         LastName = userRegisterDto.LastName,
                         Email = userRegisterDto.Email,
                         Password = userRegisterDto.Password
-                    });
-
+                    };
+                    Role userRole = await _movieContext.Roles.FirstOrDefaultAsync(r => r.Name == "user");
+                    if (userRole != null)
+                    {
+                        user.Role = userRole;
+                    }
+                       
+                    await _userRepository.Add(newUser);
                     await _userRepository.Save();
-                    await Authenticate(userRegisterDto.Email);
+                    await Authenticate(newUser);
                     return RedirectToAction("Home", "Home");
                 }
                 else
@@ -72,7 +81,7 @@ namespace MoviePoster.Controllers
 
                 if (user != null)
                 {
-                    await Authenticate(userLoginDto.Email);
+                    await Authenticate(user);
                     return RedirectToAction("Home", "Home");
                 }
 
@@ -88,11 +97,13 @@ namespace MoviePoster.Controllers
             return RedirectToAction("Home", "Home");
         }
 
-        private async Task Authenticate(string email)
+        private async Task Authenticate(User user)
         {
+            var role = await _movieContext.Roles.FindAsync(user.RoleId);
             var claims = new[]
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, email)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, role.Name)
             };
 
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);

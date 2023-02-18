@@ -15,5 +15,7 @@ namespace MoviePoster.Service.Interface
         Task<IEnumerable<PlacesDto>> GetFreePlaces(Guid oneFilmId, Guid showDateId);
         Task UpdateTicket(Guid filmId, Guid dateId, ReserveRequestUserDto user, string email);
         Task<IEnumerable<InfoBasketDto>> GetBasket(User person);
+        //Task AddTickets(AdminAddTicketDto entity);
+        Task AddFilms(AdminAddFillmDto entity);
     }
 }

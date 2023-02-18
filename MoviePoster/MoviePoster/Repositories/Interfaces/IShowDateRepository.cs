@@ -11,5 +11,6 @@ namespace MoviePoster.Repositories.Interfaces
         IQueryable<ShowDate> GetAll();
         Task<ShowDate> GetById(Guid id);
         Task Save();
+        Task Add(ShowDate showDate);
     }
 }

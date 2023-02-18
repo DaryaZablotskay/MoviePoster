@@ -24,5 +24,15 @@ namespace MoviePoster.Repositories
         {
             return await _movieContext.Films.FindAsync(id);
         }
+
+        public Task Add(Film film)
+        {
+            return _movieContext.Films.AddAsync(film).AsTask();
+        }
+
+        public Task Save()
+        {
+            return _movieContext.SaveChangesAsync();
+        }
     }
 }

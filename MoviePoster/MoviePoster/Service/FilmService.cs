@@ -17,15 +17,18 @@ namespace MoviePoster.Service
         private readonly IPlaceRepository _placeRepository;
         private readonly IShowDateRepository _showDateRepository;
         private readonly ITicketRepository _ticketRepository;
+        private readonly IFilmRepository _filmRepository;
 
-        public FilmService(MovieContext movieContext, IUserRepository userRepository, IPlaceRepository placeRepository, IShowDateRepository showDateRepository, ITicketRepository ticketRepository)
+        public FilmService(MovieContext movieContext, IUserRepository userRepository, IPlaceRepository placeRepository, IShowDateRepository showDateRepository, ITicketRepository ticketRepository, IFilmRepository filmRepository)
         {
             _movieContext = movieContext;
             _userRepository = userRepository;
             _placeRepository = placeRepository;
             _showDateRepository = showDateRepository;
             _ticketRepository = ticketRepository;
+            _filmRepository = filmRepository;
         }
+
         public async Task<IEnumerable<FilmCatalogeDto>> GetFilmCataloge()
         {
             var filmCataloge = await (from film in _movieContext.Films
@@ -136,6 +139,23 @@ namespace MoviePoster.Service
                           .Where(ibd => ibd.UserId == userId)
                           .ToListAsync();
             return basket;
+        }
+
+        public async Task AddFilms(AdminAddFillmDto entity)
+        {
+            var newFilm = new Film
+            {
+                Name = entity.FilmName,
+                Genre = entity.Genre,
+                AgeLimit = entity.AgeLimit,
+                Duration = entity.Duration,
+                Description = entity.Description,
+                PictureUrl = entity.PictureUrl,
+                Rating = entity.Rating,
+                Price = entity.Price
+            };
+            await _filmRepository.Add(newFilm);
+            await _filmRepository.Save();
         }
     }
 }
