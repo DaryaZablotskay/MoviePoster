@@ -12,10 +12,12 @@ namespace MoviePoster.Controllers
     public class PosterController : Controller
     {
         private readonly IFilmService _filmService;
+        private readonly IDateService _dateService;
 
-        public PosterController(IFilmService filmService)
+        public PosterController(IFilmService filmService, IDateService dateService)
         {
             _filmService = filmService;
+            _dateService = dateService;
         }
 
         public async Task<IActionResult> Poster()
@@ -23,11 +25,10 @@ namespace MoviePoster.Controllers
             var films = await _filmService.GetFilmCataloge();
             return View(films);
         }
-
         public async Task<IActionResult> Film(Guid filmId)
         {
             var oneFilm = await _filmService.GetOneFilm(filmId);
-            var dates = await _filmService.GetTimeForOneFilm(filmId);
+            var dates = await _dateService.GetTimeForOneFilm(filmId);
             ViewBag.Dates = dates;
 
             return View(oneFilm);

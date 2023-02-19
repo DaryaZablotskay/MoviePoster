@@ -18,8 +18,10 @@ namespace MoviePoster.Controllers
         private readonly ITicketRepository _ticketRepository;
         private readonly IPlaceRepository _placeRepository;
         private readonly IFilmService _filmService;
+        private readonly IPlaceService _placeService;
+        private readonly ITicketService _ticketService;
 
-        public BuyController(IFilmService filmService, IFilmRepository filmRepository, IShowDateRepository showDateRepository, IEmailSender emailSender, ITicketRepository ticketRepository, IPlaceRepository placeRepository)
+        public BuyController(IFilmService filmService, IFilmRepository filmRepository, IShowDateRepository showDateRepository, IEmailSender emailSender, ITicketRepository ticketRepository, IPlaceRepository placeRepository, IPlaceService placeService, ITicketService ticketService)
         {
             _filmService = filmService;
             _filmRepository = filmRepository;
@@ -27,12 +29,14 @@ namespace MoviePoster.Controllers
             _emailSender = emailSender;
             _ticketRepository = ticketRepository;
             _placeRepository = placeRepository;
+            _placeService = placeService;
+            _ticketService = ticketService;
         }
 
         [HttpGet]
         public async Task<IActionResult> Buy(Guid filmId, Guid dateId)
         {
-            var places = await _filmService.GetFreePlaces(filmId, dateId);
+            var places = await _placeService.GetFreePlaces(filmId, dateId);
             ViewBag.Places = places;
             return View();
         }
@@ -57,7 +61,7 @@ namespace MoviePoster.Controllers
 
                 if (ticket.UserId is null)
                 {
-                    await _filmService.UpdateTicket(filmId, dateId, user, email);
+                    await _ticketService.UpdateTicket(filmId, dateId, user, email);
                     string place = user.Hall + " зал, " + user.RowNumber + " ряд, " + user.SeatNumber + " место";
                     var filmName = _filmRepository.GetById(filmId).Result.Name;
                     var date = _showDateRepository.GetById(dateId).Result.Date;

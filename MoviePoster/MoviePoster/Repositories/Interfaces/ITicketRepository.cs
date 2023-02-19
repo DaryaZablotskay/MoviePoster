@@ -11,5 +11,6 @@ namespace MoviePoster.Repositories.Interfaces
         IQueryable<Ticket> GetAll();
         void Update(Ticket ticket);
         Task Save();
+        Task Add(Ticket ticket);
     }
 }
