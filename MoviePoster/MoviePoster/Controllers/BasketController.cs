@@ -14,16 +14,18 @@ namespace MoviePoster.Controllers
     {
         private readonly IUserRepository _userRepository;
         private readonly IFilmService _filmService;
+        private readonly ITicketService _ticketService;
 
-        public BasketController(IUserRepository userRepositor, IFilmService filmService)
+        public BasketController(IUserRepository userRepositor, IFilmService filmService, ITicketService ticketService)
         {
             _userRepository = userRepositor;
             _filmService = filmService;
+            _ticketService = ticketService;
         }
         public async Task<IActionResult> Basket()
         {
             var user = await _userRepository.GetByEmail(User.Identity.Name);
-            var basket = await _filmService.GetBasket(user);
+            var basket = await _ticketService.GetBasket(user);
             ViewBag.FirstName = user.FirstName;
             ViewBag.Lastname = user.LastName;
             return View(basket);

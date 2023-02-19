@@ -25,6 +25,11 @@ namespace MoviePoster.Repositories
             _movieContext.Entry(place).State = EntityState.Modified;
         }
 
+        public Task Add(Place place)
+        {
+            return _movieContext.Places.AddAsync(place).AsTask();
+        }
+
         public Task Save()
         {
             return _movieContext.SaveChangesAsync();

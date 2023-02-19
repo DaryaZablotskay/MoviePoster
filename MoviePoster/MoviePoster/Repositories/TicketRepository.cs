@@ -30,5 +30,10 @@ namespace MoviePoster.Repositories
         {
             return _movieContext.SaveChangesAsync();
         }
+
+        public Task Add(Ticket ticket)
+        {
+            return _movieContext.Tickets.AddAsync(ticket).AsTask();
+        }
     }
 }

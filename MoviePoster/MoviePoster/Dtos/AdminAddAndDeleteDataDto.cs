@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 
 namespace MoviePoster.Dtos
 {
-    public class AdminAddTicketDto
+    public class AdminAddAndDeleteDataDto
     {
-        public string FilmName { get; set; }
-        public int Hall { get; set; }
         public DateTime Date { get; set; }
     }
 }
