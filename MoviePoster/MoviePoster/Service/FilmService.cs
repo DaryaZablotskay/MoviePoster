@@ -74,8 +74,11 @@ namespace MoviePoster.Service
         public async Task DeleteFilm(AdminDeleteFilmDto entity)
         {
             var existFilm = await _filmRepository.GetAll().SingleOrDefaultAsync(f => f.Name == entity.FilmName);
-            _movieContext.Films.Remove(existFilm);
-            await _filmRepository.Save();
+            if(existFilm != null)
+            {
+                _movieContext.Films.Remove(existFilm);
+                await _filmRepository.Save();
+            }
         }
     }
 }

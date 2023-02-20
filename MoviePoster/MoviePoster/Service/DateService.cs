@@ -48,8 +48,11 @@ namespace MoviePoster.Service
         public async Task DeleteDate(AdminAddAndDeleteDataDto entity)
         {
             var existDate = await _showDateRepository.GetAll().SingleOrDefaultAsync(d => d.Date == entity.Date);
-            _movieContext.ShowDates.Remove(existDate);
-            await _showDateRepository.Save();
+            if(existDate != null)
+            {
+                _movieContext.ShowDates.Remove(existDate);
+                await _showDateRepository.Save();
+            }
         }
     }
 }

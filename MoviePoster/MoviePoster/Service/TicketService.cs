@@ -100,8 +100,11 @@ namespace MoviePoster.Service
 
             var existTicket = await _ticketRepository.GetAll()
                 .SingleOrDefaultAsync(t => t.FilmId == existFilm.FilmId && t.PlaceId == existPlace.PlaceId && t.ShowDateId == existDate.ShowDateId);
-            _movieContext.Tickets.Remove(existTicket);
-            await _ticketRepository.Save();
+            if(existTicket != null)
+            {
+                _movieContext.Tickets.Remove(existTicket);
+                await _ticketRepository.Save();
+            }
         }
     }
 }

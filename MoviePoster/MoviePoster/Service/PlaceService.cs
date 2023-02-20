@@ -61,8 +61,11 @@ namespace MoviePoster.Service
         {
             var existPlace = await _placeRepository.GetAll()
                 .SingleOrDefaultAsync(p => p.Hall == entity.Hall && p.RowNumber == entity.RowNumber && p.SeatNumber == entity.SeatNumber);
-            _movieContext.Places.Remove(existPlace);
-            await _placeRepository.Save();
+            if(existPlace != null)
+            {
+                _movieContext.Places.Remove(existPlace);
+                await _placeRepository.Save();
+            }
         }
     }
 }
