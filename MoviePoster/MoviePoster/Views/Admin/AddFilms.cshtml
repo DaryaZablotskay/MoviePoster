@@ -1,0 +1,63 @@
+﻿@using MoviePoster.Dtos
+@model AdminAddFillmDto
+
+@{
+    ViewData["Title"] = "Добавить фильм";
+}
+
+@section Background{
+    <style>
+        body {
+            background: url(https://pibig.info/uploads/posts/2022-12/1670044920_1-pibig-info-p-krasno-chernii-gradient-fon-krasivo-1.jpg);
+            background-size: cover;
+        }
+    </style>
+}
+
+@section About{
+    <span>
+        <font color="white">
+            <i class="bi bi-person"></i> Контакты: +375 29 873 17 76,
+            <a href="https://vk.com/daryushka_zzz" target="_blank" style="color:red"> Заблоцкая Дарья</a>
+        </font>
+    </span>
+}
+
+<div>
+
+    <h3 style="position: absolute; left: 500px; top: 70px; font-family: 'Comic Sans MS'">
+        <font color="white">Заполните поля:</font>
+    </h3>
+
+    <form method="post">
+        <div class="row" style="position: absolute; top: 130px; width:1200px; left:50px">
+            <div class="row">
+                <input asp-for="FilmName" class="form-control" placeholder="название фильма">
+            </div>
+            <div class="row">
+                <input asp-for="Genre" class="form-control" placeholder="жанр">
+            </div>
+            <div class="row">
+                <input asp-for="AgeLimit" class="form-control" placeholder="ограничение по возрасту">
+            </div>
+            <div class="row">
+                <input asp-for="Duration" class="form-control" placeholder="длительность">
+            </div>
+            <div class="row">
+                <input asp-for="Description" class="form-control" placeholder="описание">
+            </div>
+            <div class="row">
+                <input asp-for="PictureUrl" class="form-control" placeholder="Picture Url">
+            </div>
+            <div class="row">
+                <input asp-for="Rating" class="form-control" placeholder="рэйтинг">
+            </div>
+            <div class="row">
+                <input asp-for="Price" class="form-control" placeholder="цена">
+            </div>
+        </div>
+        <div class="row" style="position: absolute; top: 500px; left:570px">
+            <button type="submit" class="btn btn-danger">Добавить</button>
+        </div>
+    </form>
+</div>

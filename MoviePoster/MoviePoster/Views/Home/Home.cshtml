@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Главная страница";
+}
+
+@section Background{
+    <style>
+        body {
+            background: url(https://p1.pxfuel.com/preview/879/785/83/auditorium-stadium-bench-chairs.jpg);
+            background-size: cover;
+        }
+    </style>
+}
+
+@section About{
+    <span>
+        <font color="white">
+            <i class="bi bi-person"></i> Контакты: +375 29 873 17 76,
+            <a href="https://vk.com/daryushka_zzz" target="_blank" style="color:red"> Заблоцкая Дарья</a>
+        </font>
+    </span>
+}
+
+<div>
+
+    <h3 style="position:absolute; left:400px; top: 100px; font-family: 'Comic Sans MS'">
+        <font color="white">Добро пожаловать в наш кинотеатр</font>
+    </h3>
+
+    <h1 style="position: absolute; left: 560px; top: 160px; font-family: 'Comic Sans MS'">
+        <font color="red">REDCIN</font>
+    </h1>
+
+    <h3 style="position: absolute; left: 360px; top: 240px; font-family: 'Comic Sans MS'">
+        <font color="white">с высокотехнологичным оборудованием,</font>
+    </h3>
+
+    <h3 style="position: absolute; left: 250px; top: 310px; font-family: 'Comic Sans MS'">
+        <font color="white">комфортными креслами и интереснейшими фильмами.</font>
+    </h3>
+
+    <button type="button" class="btn btn-lg; btn-danger" style="position: absolute; left: 602px; top: 480px;" onclick="location.href='@Url.Action("Poster", "Poster")'">Афиша</button>
+</div>

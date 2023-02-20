@@ -1,0 +1,67 @@
+﻿@using MoviePoster.Dtos
+@model OneFilmDto
+
+@{
+    ViewData["Title"] = "Фильм";
+}
+
+@{ 
+    var dates =(IEnumerable<ShowDatesDto>)ViewBag.Dates;
+}
+
+@section Background{
+    <style>
+        body {
+            background: url(https://pibig.info/uploads/posts/2022-12/1670044920_1-pibig-info-p-krasno-chernii-gradient-fon-krasivo-1.jpg);
+            background-size: cover;
+        }
+    </style>
+}
+
+@section About{
+    <span>
+        <font color="white">
+            <i class="bi bi-person"></i> Контакты: +375 29 873 17 76,
+            <a href="https://vk.com/daryushka_zzz" target="_blank" style="color:red"> Заблоцкая Дарья</a>
+        </font>
+    </span>
+}
+<div>
+
+    <img src="@Model.OneFilmPictureUrl" style="top:110px; left:70px; position:absolute; width:260px; height:340px" />
+
+    <h3 style="position:absolute; left:355px; top: 110px; font-family: 'Comic Sans MS'">
+        <font color="white">@Model.OneFilmName</font>
+    </h3>
+
+    <h5 style="position: absolute; left: 355px; top: 170px; font-family: 'Comic Sans MS'">
+        <font color="white">@Model.OneFilmGenre / @Model.OneFilmAgeLimit+</font>
+    </h5>
+
+    <h6 style="position: absolute; left: 355px; top: 220px; font-family: 'Comic Sans MS'">
+        <font color="white">Продолжительность: @Model.OneFilmDuration минут</font>
+    </h6>
+
+    <h5 style="position: absolute; left: 355px; top: 270px; font-family: 'Comic Sans MS'">
+        <font color="white">Рейтинг:<font color="red"> @Model.OneFilmRating <i class="bi bi-star-fill" style="color: red"></i></font></font>
+    </h5>
+
+    <h5 style="position: absolute; left: 355px; top: 320px; font-family: 'Comic Sans MS'">
+        <font color="white">О фильме:</font>
+    </h5>
+    <p style="position: absolute; left: 355px; top: 350px; font-family: 'Comic Sans MS'; color: white">@Model.OneFilmDescription</p>
+
+    <h3 style="position: absolute; left: 560px; top: 500px; font-family: 'Comic Sans MS'">
+        <font color="white">Расписание: </font>
+    </h3>
+    <div style="position:absolute; left: 70px; top: 560px">
+        @foreach (var date in @dates)
+        {
+            <button type="button" class="btn btn-dark" onclick="location.href='@Url.Action("Buy", "Buy", new { filmId = @date.FilmId, dateId = @date.ShowDatesDtoId})'" style="color:white">@date.Time</button>
+        }
+    </div>
+    <div style="position:absolute; left: 570px; top: 620px">
+        <a href="#" onclick="location.href='@Url.Action("Poster", "Poster")'" class="card-link" style="color : red">Вернуться к афише</a>
+    </div>
+
+</div>

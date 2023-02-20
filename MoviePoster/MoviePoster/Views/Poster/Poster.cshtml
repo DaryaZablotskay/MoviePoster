@@ -1,0 +1,50 @@
+﻿@using MoviePoster.Dtos
+@model IEnumerable<FilmCatalogeDto>
+
+@{
+    ViewData["Title"] = "Афиша";
+}
+
+@section Background{
+    <style>
+        body {
+            background: url(https://pibig.info/uploads/posts/2022-12/1670044920_1-pibig-info-p-krasno-chernii-gradient-fon-krasivo-1.jpg);
+            background-size: cover;
+        }
+    </style>
+}
+
+@section About{
+    <span>
+        <font color="white">
+            <i class="bi bi-person"></i> Контакты: +375 29 873 17 76,
+            <a href="https://vk.com/daryushka_zzz" target="_blank" style="color:red"> Заблоцкая Дарья</a>
+        </font>
+    </span>
+}
+
+<h1 style="position: absolute; left: 560px; top: 70px; font-family: 'Comic Sans MS'">
+    <font color="red">Афиша</font>
+</h1>
+<br />
+<br />
+<br />
+
+<div class="row row-cols-1 row-cols-md-4 g-4">
+    @foreach (var film in Model)
+    {
+        <div class="col">
+            <div class="card text-white bg-dark">
+                <img src="@film.PictureUrlCataloge" class="card-img-top" />
+                <div class="card-body">
+                    <h5 class="card-title">@film.NameCataoge</h5>
+                    <p class="card-text">Жанр: @film.GenreCataloge</p>
+                    <p class="card-text" style="color:white">Цена: @film.PriceCataloge руб</p>
+                    <p class="card-text" style="color:gray">Возрастное ограничение: @film.AgeLimitCataloge+</p>
+                    <a href="#" onclick="location.href='@Url.Action("Film", "Poster", new { filmId = @film.FilmCatalogeId })'" class="card-link" style="color : red">Подробнее</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
